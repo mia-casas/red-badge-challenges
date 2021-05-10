@@ -7,9 +7,9 @@ export default class ToDoIndex extends React.Component{
         this.state = {
             tasks:[],
             newTask: '',
-            bgColor: '',
         }
         this.addTask = this.addTask.bind(this)
+        
     }
 
     addTask(event){
@@ -23,10 +23,6 @@ export default class ToDoIndex extends React.Component{
         this.setState({newTask: event.target.value})
     }
 
-    strikethrough =(e) => {
-    //    this.setState({bgColor: 'yellow'})
-    }
-
     render(){
         return(
             <div>
@@ -35,19 +31,23 @@ export default class ToDoIndex extends React.Component{
                 <input type="text" value={this.state.newTask} onChange={(event) => this.userInput(event)}></input>
                 <button type="submit">Add</button>
             </form>
-            <MyTasks allTasks={this.state.tasks} strikethrough={this.strikethrough()}/>
+            <MyTasks allTasks={this.state.tasks} />
             </div>
         )
     }
 }
 
+
+
 class MyTasks extends Component{
+
     render(){
         return(
             <div>
                 {this.props.allTasks.map((x) => {
-                    return <li style={{backgroundColor:this.state.bgColor}} onClick={this.props.strikethrough}>{x}</li>
+                    return <li >{x} </li> 
                 })}
+                <button onClick={(event) => document.body.style.textDecorationLine = 'line-through'}>Click when all tasks are completed</button>
             </div>
         )
     }
